@@ -17,6 +17,9 @@ jobs:
     container:
       image: archlinux
       options: '--privileged'
+    strategy:
+      matrix:
+        target: ['bcm27xx-bcm2711']
     steps:
       - uses: actions/checkout@v3
       - name: installing deps
@@ -29,17 +32,16 @@ jobs:
           pacman -S --noconfirm --needed asciidoc help2man intltool perl-extutils-makemaker swig
       - uses: actions/cache@v3
         with:
-          key: openwrt-imagebuilder
+          key: openwrt-imagebuilder-${{ matrix.target }}
           path: openwrt-imagebuilder-*
       - name: build image
+        environment:
+          target: ${{ matrix.target }}
         run: |
-          wget -O - https://downloads.openwrt.org/snapshots/targets/bcm27xx/bcm2711/openwrt-imagebuilder-bcm27xx-bcm2711.Linux-x86_64.tar.xz | tar -xJ
-          cd openwrt-imagebuilder-*
-          make info
-          make image PACKAGES="$PACKAGES"
+          ./build.sh
       - uses: actions/upload-artifact@v3
         with:
-          name: openwrt-image
+          name: openwrt-image-${{ matrix.target }}
           path: |
             openwrt-imagebuilder*/**/*.img.gz
 
