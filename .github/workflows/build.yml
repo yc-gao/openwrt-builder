@@ -33,7 +33,7 @@ jobs:
       - uses: actions/cache@v3
         with:
           key: openwrt-imagebuilder-${{ matrix.TARGET }}
-          path: openwrt-imagebuilder-*
+          path: openwrt-imagebuilder-${{ matrix.TARGET }}*
       - name: build image
         env:
           TARGET: ${{ matrix.TARGET }}
@@ -43,5 +43,5 @@ jobs:
         with:
           name: openwrt-image-${{ matrix.TARGET }}
           path: |
-            openwrt-imagebuilder*/**/*.img.gz
+            openwrt-imagebuilder-${{ matrix.TARGET }}*/**/*.img.gz
 
