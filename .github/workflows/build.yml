@@ -35,7 +35,7 @@ jobs:
           key: openwrt-imagebuilder-${{ matrix.target }}
           path: openwrt-imagebuilder-*
       - name: build image
-        environment:
+        env:
           target: ${{ matrix.target }}
         run: |
           ./build.sh
