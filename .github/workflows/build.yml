@@ -19,7 +19,7 @@ jobs:
       options: '--privileged'
     strategy:
       matrix:
-        target: ['bcm27xx-bcm2711']
+        target: ['bcm27xx-bcm2711', 'x86-64']
     steps:
       - uses: actions/checkout@v3
       - name: installing deps
