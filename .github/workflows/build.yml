@@ -14,7 +14,7 @@ jobs:
     strategy:
       matrix:
         TARGET: ['bcm27xx-bcm2711', 'x86-64']
-        VERSION: ['v21.02.1']
+        VERSION: ['21.02.1']
     steps:
       - uses: actions/checkout@v3
       - name: installing deps

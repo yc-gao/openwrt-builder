@@ -1,15 +1,15 @@
 #!/bin/bash
 
 TARGET=${TARGET:-bcm27xx-bcm2711}
-VERSION=${VERSION:-v21.02.1}
+VERSION=${VERSION:-21.02.1}
 
 [[ ! -d openwrt-${TARGET} ]] && git clone https://git.openwrt.org/openwrt/openwrt.git openwrt-${TARGET}
 
 pushd openwrt-${TARGET}
 
 git pull
-git checkout ${VERSION}
-wget https://downloads.openwrt.org/releases/${VERSION/v/}/targets/${TARGET/\//-}/config.buildinfo -O .config
+git checkout v${VERSION}
+wget https://downloads.openwrt.org/releases/${VERSION}/targets/${TARGET/\//-}/config.buildinfo -O .config
 
 ./scripts/feeds update -a
 ./scripts/feeds install -a
