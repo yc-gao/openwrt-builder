@@ -35,4 +35,9 @@ jobs:
           VERSION: ${{ matrix.VERSION }}
         run: |
           ./build.sh
+      - uses: actions/upload-artifact@v3
+        with:
+          name: openwrt-${{ matrix.TARGET }}
+          path: |
+            openwrt-${{ matrix.TARGET }}
 
