@@ -26,16 +26,11 @@ jobs:
           pacman -S --noconfirm --needed asciidoc help2man intltool perl-extutils-makemaker swig
       - uses: actions/cache@v3
         with:
-          key: openwrt-imagebuilder-${{ matrix.TARGET }}
-          path: openwrt-imagebuilder-${{ matrix.TARGET }}*
+          key: openwrt-${{ matrix.TARGET }}
+          path: openwrt-${{ matrix.TARGET }}*
       - name: build image
         env:
           TARGET: ${{ matrix.TARGET }}
         run: |
           ./build.sh
-      - uses: actions/upload-artifact@v3
-        with:
-          name: openwrt-image-${{ matrix.TARGET }}
-          path: |
-            openwrt-imagebuilder-${{ matrix.TARGET }}*/**/*.img.gz
 
