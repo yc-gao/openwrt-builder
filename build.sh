@@ -1,6 +1,7 @@
 #!/bin/bash
 
 git clone https://github.com/coolsnowwolf/lede
+cp diffconfig lede/.config
 
 pushd lede
 
