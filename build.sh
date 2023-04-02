@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # prepare source
-wget -q -O - https://github.com/coolsnowwolf/lede/archive/refs/tags/20220401.tar.gz | tar -xz
+wget -q -O - https://github.com/coolsnowwolf/lede/archive/refs/tags/20221001.tar.gz | tar -xz
 mv lede-* lede
 
 # load config
