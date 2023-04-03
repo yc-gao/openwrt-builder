@@ -23,7 +23,7 @@ jobs:
           pacman -S --noconfirm --needed asciidoc help2man intltool perl-extutils-makemaker swig
       - name: extract source
         run: |
-          git clone https://github.com/immortalwrt/immortalwrt openwrt
+          git clone -b openwrt-21.02 https://github.com/immortalwrt/immortalwrt openwrt
       - name: compile
         run: |
           cd openwrt
