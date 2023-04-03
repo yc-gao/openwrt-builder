@@ -23,11 +23,10 @@ jobs:
           pacman -S --noconfirm --needed asciidoc help2man intltool perl-extutils-makemaker swig
       - name: extract source
         run: |
-          wget -q -O - https://github.com/coolsnowwolf/lede/archive/refs/tags/20221001.tar.gz | tar -xz
-          mv lede-* lede
+          git clone https://github.com/immortalwrt/immortalwrt openwrt
       - name: compile
         run: |
-          cd lede
+          cd openwrt
           ./scripts/feeds update -a
           ./scripts/feeds install -a
           make defconfig
