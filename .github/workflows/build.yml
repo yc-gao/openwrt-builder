@@ -31,7 +31,7 @@ jobs:
           ./scripts/feeds install -a
           make defconfig
           make download -j$(nproc)
-          make -j$(nproc)
+          make V=sc -j$(nproc)
       - uses: actions/upload-artifact@v3
         with:
           name: openwrt
