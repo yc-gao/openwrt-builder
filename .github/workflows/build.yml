@@ -28,6 +28,7 @@ jobs:
       - name: extract source
         run: |
           [[ ! -e openwrt ]] && git clone https://github.com/immortalwrt/immortalwrt openwrt
+          cp config/x86-64.config openwrt/.config
           cd openwrt
           git pull --rebase
           git checkout openwrt-18.06-k5.4
