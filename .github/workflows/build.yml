@@ -8,6 +8,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        TARGET: ['x86-64']
     steps:
       - uses: actions/checkout@v3
       - name: installing deps
@@ -18,12 +21,12 @@ jobs:
             file wget
       - uses: actions/cache@v3
         with:
-          key: openwrt
+          key: openwrt-${{ matrix.TARGET }}
           path: openwrt
       - name: extract source
         run: |
           [[ ! -e openwrt ]] && git clone https://github.com/immortalwrt/immortalwrt openwrt
-          cp config/x86-64.config openwrt/.config
+          cp config/${{ matrix.TARGET }}.config openwrt/.config
           cd openwrt
           git pull --rebase
           git checkout openwrt-18.06-k5.4
@@ -37,6 +40,6 @@ jobs:
           make
       - uses: actions/upload-artifact@v3
         with:
-          name: openwrt
+          name: openwrt-${{ matrix.TARGET }}
           path: openwrt
 
