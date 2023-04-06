@@ -2,6 +2,10 @@ name: 'openwrt builder'
 
 on: [push]
 
+env:
+  REPO: https://github.com/immortalwrt/immortalwrt
+  TAG: openwrt-21.02
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -22,11 +26,11 @@ jobs:
           path: openwrt
       - name: extract source
         run: |
-          [[ ! -e openwrt ]] && git clone https://github.com/immortalwrt/immortalwrt openwrt
+          [[ ! -e openwrt ]] && git clone ${REPO} openwrt
           cp config/${{ matrix.TARGET }}.config openwrt/.config
           cd openwrt
           git pull --rebase
-          git checkout openwrt-18.06-k5.4
+          git checkout ${TAG}
       - name: compile
         run: |
           cd openwrt
