@@ -1,9 +1,6 @@
 name: 'openwrt builder'
 
-on:
-  push:
-    branchs:
-      - master
+on: [push]
 
 jobs:
   build:
@@ -41,5 +38,5 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: openwrt-${{ matrix.TARGET }}
-          path: openwrt
+          path: openwrt/bin
 
