@@ -4,7 +4,7 @@ on: [push]
 
 env:
   REPO: https://github.com/immortalwrt/immortalwrt
-  TAG: openwrt-21.02
+  TAG: openwrt-18.06-k5.4
 
 jobs:
   build:
