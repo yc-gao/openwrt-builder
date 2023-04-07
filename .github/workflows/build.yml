@@ -34,6 +34,7 @@ jobs:
       - name: compile
         uses: nick-fields/retry@v2
         with:
+          timeout_minutes: 120
           max_attempts: 3
           command: |
             cd openwrt
