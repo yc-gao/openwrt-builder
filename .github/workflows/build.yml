@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        TARGET: ['x86-64', 'bcm27xx-bcm2711']
+        TARGET: ['bcm27xx-bcm2711']
     steps:
       - uses: actions/checkout@v3
       - name: installing deps
