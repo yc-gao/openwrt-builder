@@ -40,9 +40,7 @@ jobs:
             cd openwrt
             ./scripts/feeds update -a
             ./scripts/feeds install -a
-            make defconfig
-            make download
-            make
+            make -j$(nproc) defconfig download clean world
       - uses: actions/upload-artifact@v3
         with:
           name: openwrt-${{ matrix.TARGET }}
