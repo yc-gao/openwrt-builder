@@ -30,6 +30,7 @@ jobs:
           max_attempts: 3
           command: |
             cd openwrt
+            sed -i '/helloworld/{s/^#//}' feeds.conf.default
             ./scripts/feeds update -a
             ./scripts/feeds install -a
             make defconfig
