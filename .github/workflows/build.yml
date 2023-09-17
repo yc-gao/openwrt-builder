@@ -33,6 +33,7 @@ jobs:
             sed -i '/helloworld/{s/^#//}' feeds.conf.default
             ./scripts/feeds update -a
             ./scripts/feeds install -a
+            cp ${{ matrix.TARGET }}.diffconfig .config
             make defconfig
             make -j$(nproc) download clean world
       - uses: actions/upload-artifact@v3
