@@ -3,8 +3,8 @@ name: 'openwrt builder'
 on: [push]
 
 env:
-  REPO: https://github.com/immortalwrt/immortalwrt
-  TAG: openwrt-18.06-k5.4
+  REPO: https://github.com/coolsnowwolf/lede.git
+  TAG: master
 
 jobs:
   build:
@@ -32,7 +32,8 @@ jobs:
             cd openwrt
             ./scripts/feeds update -a
             ./scripts/feeds install -a
-            make -j$(nproc) defconfig download clean world
+            make defconfig
+            make -j$(nproc) download clean world
       - uses: actions/upload-artifact@v3
         with:
           name: openwrt-${{ matrix.TARGET }}
