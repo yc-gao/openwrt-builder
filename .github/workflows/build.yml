@@ -24,17 +24,12 @@ jobs:
         run: |
           git clone -b ${TAG} --single-branch --filter=blob:none ${REPO} openwrt
           cd openwrt
-          sed -i '/helloworld/{s/^#//}' feeds.conf.default
           ./scripts/feeds update -a
           ./scripts/feeds install -a
       - name: prepare
         run: |
           cp config/${{ matrix.TARGET }}.diffconfig openwrt/.config
-          cat openwrt/.config
           cd openwrt
-          sed -i '/helloworld/{s/^#//}' feeds.conf.default
-          ./scripts/feeds update -a
-          ./scripts/feeds install -a
           make defconfig
       - name: compile
         uses: nick-fields/retry@v2
