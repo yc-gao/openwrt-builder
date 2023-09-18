@@ -27,16 +27,22 @@ jobs:
           sed -i '/helloworld/{s/^#//}' feeds.conf.default
           ./scripts/feeds update -a
           ./scripts/feeds install -a
+      - name: prepare
+        run: |
+          cp ${{ matrix.TARGET }}.diffconfig openwrt/.config
+          cat openwrt/.config
+          cd openwrt
+          sed -i '/helloworld/{s/^#//}' feeds.conf.default
+          ./scripts/feeds update -a
+          ./scripts/feeds install -a
+          make defconfig
       - name: compile
         uses: nick-fields/retry@v2
         with:
           timeout_minutes: 180
           max_attempts: 3
           command: |
-            cp ${{ matrix.TARGET }}.diffconfig openwrt/.config
-            cd openwrt
-            make defconfig
-            make -j$(nproc) download clean world
+            make -j$(nproc) clean world
       - uses: actions/upload-artifact@v3
         with:
           name: openwrt-${{ matrix.TARGET }}
