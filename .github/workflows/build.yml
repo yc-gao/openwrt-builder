@@ -23,17 +23,18 @@ jobs:
       - name: extract source
         run: |
           git clone -b ${TAG} --single-branch --filter=blob:none ${REPO} openwrt
+          cd openwrt
+          sed -i '/helloworld/{s/^#//}' feeds.conf.default
+          ./scripts/feeds update -a
+          ./scripts/feeds install -a
       - name: compile
         uses: nick-fields/retry@v2
         with:
           timeout_minutes: 180
           max_attempts: 3
           command: |
+            cp ${{ matrix.TARGET }}.diffconfig openwrt/.config
             cd openwrt
-            sed -i '/helloworld/{s/^#//}' feeds.conf.default
-            ./scripts/feeds update -a
-            ./scripts/feeds install -a
-            cp ${{ matrix.TARGET }}.diffconfig .config
             make defconfig
             make -j$(nproc) download clean world
       - uses: actions/upload-artifact@v3
