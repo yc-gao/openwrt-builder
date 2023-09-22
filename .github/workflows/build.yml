@@ -13,6 +13,8 @@ jobs:
       matrix:
         TARGET: ['bcm27xx-bcm2711', 'x86-generic']
     steps:
+      - run: |
+          curl -L https://raw.githubusercontent.com/apache/flink/master/tools/azure-pipelines/free_disk_space.sh | bash
       - uses: actions/checkout@v3
       - name: installing deps
         run: |
