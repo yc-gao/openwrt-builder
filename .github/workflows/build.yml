@@ -22,7 +22,7 @@ jobs:
             file wget
       - uses: actions/cache@v3
         with:
-          key: lede-${{ env.TAG }}
+          key: lede-${{ matrix.TARGET }}-${{ env.TAG }}
           path: openwrt
       - name: prepare
         run: |
