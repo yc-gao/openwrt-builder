@@ -34,7 +34,9 @@ jobs:
           ./scripts/feeds install -a
           cp ${{ github.workspace }}/config/${{ matrix.TARGET }}.diffconfig ./.config
           make defconfig
+          echo "feeds.conf.default:"
           cat feeds.conf.default
+          echo ".config:"
           cat .config
       - name: compile
         uses: nick-fields/retry@v2
