@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        TARGET: ['bcm27xx-bcm2711', 'x86-generic']
+        TARGET: ['bcm27xx-bcm2711', 'x86-64']
     steps:
       - run: |
           curl -L https://raw.githubusercontent.com/apache/flink/master/tools/azure-pipelines/free_disk_space.sh | bash
