@@ -48,6 +48,9 @@ jobs:
           command: |
             cd openwrt
             make -j$(nproc) clean world
+          new_command_on_retry: |
+            cd openwrt
+            make -j1 V=sc clean world
       - uses: actions/upload-artifact@v3
         with:
           name: openwrt-${{ matrix.TARGET }}
