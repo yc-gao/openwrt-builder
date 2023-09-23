@@ -47,10 +47,10 @@ jobs:
           max_attempts: 3
           command: |
             cd openwrt
-            make -j$(nproc) clean world
+            make -j$(nproc) download clean world
           new_command_on_retry: |
             cd openwrt
-            make -j1 V=sc clean world
+            make -j1 V=sc download clean world
       - uses: actions/upload-artifact@v3
         with:
           name: openwrt-${{ matrix.TARGET }}
