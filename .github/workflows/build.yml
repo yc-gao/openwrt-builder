@@ -2,19 +2,16 @@ name: 'openwrt builder'
 
 on: [push]
 
+env:
+  REPO: https://github.com/openwrt/openwrt.git
+  TAG: v23.05.0-rc4
+
 jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         TARGET: ['x86-64']
-        REPO:
-          - id: lede-20230609
-            url: https://github.com/coolsnowwolf/lede.git
-            tag: 20230609
-          - id: openwrt-v23.05.0-rc4
-            url: https://github.com/openwrt/openwrt.git
-            tag: v23.05.0-rc4
     steps:
       - run: |
           curl -L https://raw.githubusercontent.com/apache/flink/master/tools/azure-pipelines/free_disk_space.sh | bash
@@ -27,12 +24,12 @@ jobs:
             file wget qemu-system
       - uses: actions/cache@v3
         with:
-          key: openwrt-${{ matrix.TARGET }}-${{ $matrix.REPO.id }}
+          key: openwrt-${{ matrix.TARGET }}-${{ env.TAG }}
           path: openwrt
       - name: prepare
         run: |
-          [[ -d openwrt ]] && (cd openwrt && git pull --rebase)
-          [[ ! -d openwrt ]] && git clone -b ${{ matrix.REPO.tag }} --single-branch --filter=blob:none ${{ matrix.REPO.url }} openwrt
+          [ -d openwrt ] && (cd openwrt && git pull --rebase || true)
+          [ ! -e openwrt ] && git clone -b ${TAG} --single-branch --filter=blob:none ${REPO} openwrt
           cd openwrt
           echo 'src-git helloworld https://github.com/fw876/helloworld.git' >> feeds.conf.default
           ./scripts/feeds update -a
@@ -52,6 +49,5 @@ jobs:
             make -j1 V=sc download clean world
       - uses: actions/upload-artifact@v3
         with:
-          name: openwrt-${{ matrix.TARGET }}-${{ $matrix.REPO.id }}
+          name: openwrt-${{ matrix.TARGET }}
           path: openwrt/bin
-
