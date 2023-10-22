@@ -28,7 +28,7 @@ jobs:
           path: openwrt
       - name: prepare
         run: |
-          [ -d openwrt ] && (cd openwrt && git pull --rebase || true)
+          [ -d openwrt ] && (cd openwrt && git reset --hard HEAD && git pull --rebase || true)
           [ ! -e openwrt ] && git clone -b ${TAG} --single-branch --filter=blob:none ${REPO} openwrt
           cd openwrt
           echo 'src-git helloworld https://github.com/fw876/helloworld.git' >> feeds.conf.default
