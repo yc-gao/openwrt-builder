@@ -31,7 +31,7 @@ jobs:
           [ -d openwrt ] && (cd openwrt && git reset --hard HEAD && git pull --rebase || true)
           [ ! -e openwrt ] && git clone -b ${TAG} --single-branch --filter=blob:none ${REPO} openwrt
           cd openwrt
-          echo 'src-git helloworld https://github.com/fw876/helloworld.git' >> feeds.conf.default
+          cp ${{ github.workspace }}/config/${{ matrix.TARGET }}.conf.default ./feeds.conf.default
           ./scripts/feeds update -a
           ./scripts/feeds install -a
           cp ${{ github.workspace }}/config/${{ matrix.TARGET }}.diffconfig ./.config
