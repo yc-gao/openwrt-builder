@@ -31,10 +31,10 @@ jobs:
           [ -d openwrt ] && (cd openwrt && git reset --hard HEAD && git pull --rebase || true)
           [ ! -e openwrt ] && git clone -b ${TAG} --single-branch --filter=blob:none ${REPO} openwrt
           cd openwrt
-          cp ${{ github.workspace }}/config/${{ matrix.TARGET }}.conf.default ./feeds.conf.default
+          cp ${{ github.workspace }}/config/${{ matrix.TARGET }}.feeds.conf.default ./feeds.conf.default
           ./scripts/feeds update -a
           ./scripts/feeds install -a
-          cp ${{ github.workspace }}/config/${{ matrix.TARGET }}.diffconfig ./.config
+          cp ${{ github.workspace }}/config/${{ matrix.TARGET }}.config ./.config
           make defconfig
       - name: compile
         uses: nick-fields/retry@v2
