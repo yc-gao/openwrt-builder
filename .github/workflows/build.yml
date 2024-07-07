@@ -3,8 +3,7 @@ name: 'openwrt builder'
 on: [push]
 
 env:
-  REPO: https://github.com/openwrt/openwrt.git
-  TAG: v23.05.0-rc4
+  REPO: https://github.com/coolsnowwolf/lede.git
 
 jobs:
   build:
@@ -29,9 +28,9 @@ jobs:
       - name: prepare
         run: |
           [ -d openwrt ] && (cd openwrt && git reset --hard HEAD && git pull --rebase || true)
-          [ ! -e openwrt ] && git clone -b ${TAG} --single-branch --filter=blob:none ${REPO} openwrt
+          [ ! -e openwrt ] && git clone --single-branch --filter=blob:none ${REPO} openwrt
           cd openwrt
-          cp ${{ github.workspace }}/config/${{ matrix.TARGET }}.feeds.conf.default ./feeds.conf.default
+          sed -i 's/#src-git helloworld/src-git helloworld/g' ./feeds.conf.default
           ./scripts/feeds update -a
           ./scripts/feeds install -a
           cp ${{ github.workspace }}/config/${{ matrix.TARGET }}.config ./.config
@@ -49,5 +48,10 @@ jobs:
             make -j1 V=sc download clean world
       - uses: actions/upload-artifact@v3
         with:
-          name: openwrt-${{ matrix.TARGET }}
-          path: openwrt/bin
+          name: openwrt-firmware
+          path: openwrt/bin/targets
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: openwrt-package
+          path: openwrt/bin/packages
