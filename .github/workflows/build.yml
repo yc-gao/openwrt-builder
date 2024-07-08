@@ -33,7 +33,7 @@ jobs:
           sed -i 's/#src-git helloworld/src-git helloworld/g' ./feeds.conf.default
           ./scripts/feeds update -a
           ./scripts/feeds install -a
-          # cp ${{ github.workspace }}/config/${{ matrix.TARGET }}.config ./.config
+          cp ${{ github.workspace }}/config/${{ matrix.TARGET }}.config ./.config
           make defconfig
       - name: compile
         uses: nick-fields/retry@v2
