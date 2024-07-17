@@ -4,7 +4,7 @@ on: [push]
 
 env:
   REPO: https://github.com/openwrt/openwrt.git
-  TAG: v23.05.4
+  TAG: v23.05.3
 
 jobs:
   build:
