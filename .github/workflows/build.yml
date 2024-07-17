@@ -3,7 +3,8 @@ name: 'openwrt builder'
 on: [push]
 
 env:
-  REPO: https://github.com/coolsnowwolf/lede.git
+  REPO: https://github.com/openwrt/openwrt.git
+  TAG: v23.05.4
 
 jobs:
   build:
@@ -21,19 +22,13 @@ jobs:
           sudo apt install -y build-essential clang flex bison g++ gawk gcc-multilib g++-multilib \
             gettext git libncurses5-dev libssl-dev python3-distutils rsync unzip zlib1g-dev \
             file wget qemu-system
-      - uses: actions/cache@v3
-        with:
-          key: openwrt-${{ matrix.TARGET }}-${{ env.TAG }}
-          path: openwrt
       - name: prepare
         run: |
-          [ -d openwrt ] && (cd openwrt && git reset --hard HEAD && git pull --rebase || true)
-          [ ! -e openwrt ] && git clone --single-branch --filter=blob:none ${REPO} openwrt
+          git clone -b ${TAG} --single-branch --filter=blob:none ${REPO} openwrt
           cd openwrt
-          sed -i 's/#src-git helloworld/src-git helloworld/g' ./feeds.conf.default
           ./scripts/feeds update -a
           ./scripts/feeds install -a
-          # cp ${{ github.workspace }}/config/${{ matrix.TARGET }}.config ./.config
+          cp ${{ github.workspace }}/config/${{ matrix.TARGET }}.config ./.config
           make defconfig
       - name: compile
         uses: nick-fields/retry@v2
