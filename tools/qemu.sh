@@ -5,5 +5,5 @@ qemu-system-x86_64 \
     -nic user \
     -nic user \
     -drive if=pflash,format=raw,readonly=on,file=/usr/share/edk2-ovmf/x64/OVMF_CODE.fd \
-    -drive format=raw,file=openwrt-x86_64-combined-ext4.img
+    -drive format=raw,file=openwrt-x86-64-generic-ext4-combined-efi.img
 
