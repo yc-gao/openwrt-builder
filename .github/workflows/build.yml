@@ -3,7 +3,7 @@ name: 'openwrt builder'
 on: [push]
 
 env:
-  REPO: https://github.com/openwrt/openwrt.git
+  REPO: https://github.com/immortalwrt/immortalwrt.git
   TAG: v23.05.3
 
 jobs:
@@ -24,9 +24,10 @@ jobs:
             file wget qemu-system
       - name: prepare
         run: |
-          git clone -b ${TAG} --single-branch --filter=blob:none ${REPO} openwrt
+          git clone -b ${TAG} ${REPO} openwrt
           cd openwrt
-          cp ${{ github.workspace }}/config/${{ matrix.TARGET }}.feeds.conf.default ./feeds.conf.default
+          # cp ${{ github.workspace }}/config/${{ matrix.TARGET }}.feeds.conf.default ./feeds.conf.default
+          echo "src-git helloworld https://github.com/fw876/helloworld.git" >> "feeds.conf.default"
           ./scripts/feeds update -a
           ./scripts/feeds install -a
           cp ${{ github.workspace }}/config/${{ matrix.TARGET }}.config ./.config
