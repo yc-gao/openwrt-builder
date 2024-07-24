@@ -3,7 +3,7 @@ name: 'openwrt builder'
 on: [push]
 
 env:
-  REPO: https://github.com/immortalwrt/immortalwrt.git
+  REPO: https://github.com/coolsnowwolf/lede.git
   TAG: v23.05.3
 
 jobs:
