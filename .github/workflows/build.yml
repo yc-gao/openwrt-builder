@@ -3,8 +3,8 @@ name: 'openwrt builder'
 on: [push]
 
 env:
-  REPO: https://github.com/coolsnowwolf/lede.git
-  TAG: 20230609
+  REPO: https://github.com/openwrt/openwrt.git
+  TAG: v23.05.4
 
 jobs:
   build:
