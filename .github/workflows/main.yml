@@ -17,8 +17,8 @@ jobs:
         uses: openwrt/gh-action-sdk@main
         env:
           ARCH: ${{ matrix.ARCH }}-${{ matrix.TAG }}
-          EXTRA_FEEDS:
-            src-git|helloworld|https://github.com/fw876/helloworld.git
+          # EXTRA_FEEDS:
+          #   src-git|helloworld|https://github.com/fw876/helloworld.git
           IGNORE_ERRORS: 1
           PACKAGES:
             luci-app-ssr-plus
