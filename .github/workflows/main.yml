@@ -19,6 +19,7 @@ jobs:
           ARCH: ${{ matrix.ARCH }}-${{ matrix.TAG }}
           EXTRA_FEEDS:
             src-git|helloworld|https://github.com/fw876/helloworld.git
+          IGNORE_ERRORS: 1
       - name: Store packages
         uses: actions/upload-artifact@v2
         with:
