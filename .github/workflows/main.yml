@@ -26,5 +26,5 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: ${{ matrix.ARCH }}-packages
-          path: bin/packages/${{ matrix.ARCH }}/packages/*.ipk
+          path: bin/packages/${{ matrix.ARCH }}/packages
 
