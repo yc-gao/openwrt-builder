@@ -13,18 +13,16 @@ jobs:
         TARGET: ['x86-64']
         TAG: ["v23.05.4"]
     runs-on: ubuntu-latest
-    container:
-      image: openwrt/imagebuilder:${{ matrix.TARGET }}-${{ matrix.TAG }}
     steps:
       - uses: actions/checkout@v3
-      # - name: installing deps
-      #   run: |
-      #     sudo apt update
-      #     sudo apt install -y build-essential clang g++ gcc-multilib g++-multilib \
-      #       libboost-all-dev libncurses5-dev libssl-dev \
-      #       python3-distutils \
-      #       gettext git flex bison gawk rsync unzip zlib1g-dev \
-      #       file wget qemu-system
+      - name: installing deps
+        run: |
+          sudo apt update
+          sudo apt install -y build-essential clang g++ gcc-multilib g++-multilib \
+            libboost-all-dev libncurses5-dev libssl-dev \
+            python3-distutils \
+            gettext git flex bison gawk rsync unzip zlib1g-dev \
+            file wget qemu-system
       - name: prepare
         run: |
           git clone -b ${{ matrix.TAG }} ${REPO} openwrt
@@ -40,11 +38,19 @@ jobs:
           timeout_minutes: 300
           max_attempts: 3
           command: |
-            cd openwrt
-            make -j$(nproc) download clean world
+            docker run --rm -ti \
+              -v $PWD:$PWD -w $PWD/openwrt \
+              openwrt/imagebuilder:${{ matrix.TARGET }}-${{ matrix.TAG }} \
+              make defconfig
+            docker run --rm -ti \
+              -v $PWD:$PWD -w $PWD/openwrt \
+              openwrt/imagebuilder:${{ matrix.TARGET }}-${{ matrix.TAG }} \
+              make -j$(nproc) download clean world
           new_command_on_retry: |
-            cd openwrt
-            make -j1 V=sc download clean world
+            docker run --rm -ti \
+              -v $PWD:$PWD -w $PWD/openwrt \
+              openwrt/imagebuilder:${{ matrix.TARGET }}-${{ matrix.TAG }} \
+              make -j1 V=sc download clean world
       - uses: actions/upload-artifact@v3
         with:
           name: openwrt-firmware
