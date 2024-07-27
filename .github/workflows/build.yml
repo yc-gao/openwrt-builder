@@ -31,7 +31,6 @@ jobs:
           ./scripts/feeds update -a
           ./scripts/feeds install -a
           cp ${{ github.workspace }}/config/${{ matrix.TARGET }}.config ./.config
-          make defconfig
       - name: compile
         uses: nick-fields/retry@v2
         with:
