@@ -1,0 +1,25 @@
+name: 'openwrt builder'
+
+on: [push]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        ARCH: ['x86-64']
+        TAG: ["23.05.4"]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Build
+        uses: openwrt/gh-action-sdk@main
+        env:
+          ARCH: ${{ matrix.ARCH }}-${{ matrix.TAG }}
+      - name: Store packages
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ matrix.ARCH }}-packages
+          path: bin/packages/${{ matrix.ARCH }}/packages/*.ipk
+
