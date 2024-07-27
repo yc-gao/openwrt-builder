@@ -17,6 +17,8 @@ jobs:
         uses: openwrt/gh-action-sdk@main
         env:
           ARCH: ${{ matrix.ARCH }}-${{ matrix.TAG }}
+          EXTRA_FEEDS:
+            src-git|helloworld|https://github.com/fw876/helloworld.git
       - name: Store packages
         uses: actions/upload-artifact@v2
         with:
