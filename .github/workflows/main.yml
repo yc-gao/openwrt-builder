@@ -20,6 +20,8 @@ jobs:
           EXTRA_FEEDS:
             src-git|helloworld|https://github.com/fw876/helloworld.git
           IGNORE_ERRORS: 1
+          PACKAGES:
+            luci-app-ssr-plus
       - name: Store packages
         uses: actions/upload-artifact@v2
         with:
