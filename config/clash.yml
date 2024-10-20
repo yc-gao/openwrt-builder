@@ -5,6 +5,8 @@ proxy-groups:
     - { name: Proxy-fallback, type: fallback, proxies: *pg_default }
     - { name: GPT, type: fallback, proxies: *pg_GPT }
 rules:
+    - 'DOMAIN-SUFFIX,fromsoftware-game.net,DIRECT'
+
     - 'GEOIP,CN,DIRECT'
     - 'MATCH,Proxy'
 dns:
