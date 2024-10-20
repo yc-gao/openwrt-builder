@@ -1,0 +1,72 @@
+proxy-groups:
+    - { name: Proxy, type: select, proxies: [Proxy-manual, Proxy-test, Proxy-fallback] }
+    - { name: Proxy-manual, type: select, proxies: *pg_default }
+    - { name: Proxy-test, type: url-test, proxies: *pg_default }
+    - { name: Proxy-fallback, type: fallback, proxies: *pg_default }
+    - { name: GPT, type: fallback, proxies: *pg_GPT }
+rules:
+    - 'DOMAIN-SUFFIX,chatgpt.com,GPT'
+    - 'DOMAIN-SUFFIX,v2ex.com,Proxy'
+    - 'DOMAIN-SUFFIX,metacubex.one,Proxy'
+
+    # steam config
+    - 'DOMAIN-SUFFIX,steamstatic.com,Proxy'
+    - 'DOMAIN-SUFFIX,steamserver.net,Proxy'
+    - 'DOMAIN-SUFFIX,steampowered.com,Proxy'
+    - 'DOMAIN-SUFFIX,steamcommunity.com,Proxy'
+    # steam config end
+
+    # github config
+    - 'DOMAIN-SUFFIX,github.com,Proxy'
+    - 'DOMAIN-SUFFIX,githubusercontent.com,Proxy'
+    - 'DOMAIN-SUFFIX,githubassets.com,Proxy'
+    # github config end
+
+    # google config
+    - 'DOMAIN-SUFFIX,google.com,Proxy'
+    - 'DOMAIN-SUFFIX,google.com.hk,Proxy'
+    - 'DOMAIN-SUFFIX,googleusercontent.com,Proxy'
+    - 'DOMAIN-SUFFIX,googlevideo.com,Proxy'
+    - 'DOMAIN-SUFFIX,googleapis.com,Proxy'
+    - 'DOMAIN-SUFFIX,ggpht.com,Proxy'
+    - 'DOMAIN-SUFFIX,youtube.com,Proxy'
+    - 'DOMAIN-SUFFIX,ytimg.com,Proxy'
+    # google config end
+
+    - 'MATCH,DIRECT'
+dns:
+    enable: true
+    ipv6: false
+    enhanced-mode: fake-ip
+    fake-ip-range: 198.18.0.1/16
+    listen: 0.0.0.0:7874
+    nameserver:
+        - 114.114.114.114
+        - 119.29.29.29
+    fallback:
+        - tls://8.8.4.4
+        - tls://1.1.1.1
+    fallback-filter:
+        geosite:
+            - gfw
+        domain:
+            - '*.v2ex.com'
+            - '*.metacubex.one'
+
+            - '*.steamstatic.com'
+            - '*.steamserver.net'
+            - '*.steampowered.com'
+            - '*.steamcommunity.com'
+
+            - '*.github.com'
+            - '*.githubusercontent.com'
+            - '*.githubassets.com'
+
+            - '*.google.com'
+            - '*.google.com.hk'
+            - '*.googleusercontent.com'
+            - '*.googlevideo.com'
+            - '*.googleapis.com'
+            - '*.ggpht.com'
+            - '*.youtube.com'
+            - '*.ytimg.com'
