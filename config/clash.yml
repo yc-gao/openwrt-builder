@@ -3,7 +3,7 @@ proxy-groups:
     - { name: Proxy-manual, type: select, proxies: *pg_default }
     - { name: Proxy-test, type: url-test, proxies: *pg_default }
     - { name: Proxy-fallback, type: fallback, proxies: *pg_default }
-    - { name: GPT, type: fallback, proxies: *pg_GPT }
+    - { name: GPT, type: select, proxies: *pg_GPT }
 rules:
     - 'GEOIP,google,Proxy'
     - 'GEOSITE,google,Proxy'
