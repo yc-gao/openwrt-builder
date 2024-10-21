@@ -5,43 +5,49 @@ proxy-groups:
     - { name: Proxy-fallback, type: fallback, proxies: *pg_default }
     - { name: GPT, type: fallback, proxies: *pg_GPT }
 rules:
-    - 'DOMAIN-SUFFIX,fromsoftware-game.net,DIRECT'
+    - 'GEOIP,google,Proxy'
+    - 'GEOSITE,google,Proxy'
+
+    - 'GEOSITE,github,Proxy'
+
+    - 'GEOSITE,youtube,Proxy'
+
+    - 'GEOIP,telegram,Proxy'
+    - 'GEOSITE,telegram,Proxy'
+
+    - 'GEOIP,twitter,Proxy'
+    - 'GEOSITE,twitter,Proxy'
+
+    - 'GEOIP,netflix,Proxy'
+    - 'GEOSITE,netflix,Proxy'
 
     - 'GEOIP,CN,DIRECT'
+    - 'GEOIP,lan,DIRECT'
+    - 'GEOSITE,cn,DIRECT'
+    - 'GEOSITE,geolocation-!cn,Proxy'
+
     - 'MATCH,Proxy'
 dns:
     enable: true
     ipv6: false
+    listen: 0.0.0.0:7874
     enhanced-mode: fake-ip
     fake-ip-range: 198.18.0.1/16
-    listen: 0.0.0.0:7874
+    fake-ip-filter:
+        - '+.local'
+    default-nameserver:
+        - 223.5.5.5
+        - 223.6.6.6
     nameserver:
-        - 114.114.114.114
-        - 119.29.29.29
-    fallback:
-        - tls://8.8.4.4
-        - tls://1.1.1.1
-    fallback-filter:
-        geosite:
-            - gfw
-        domain:
-            - '*.v2ex.com'
-            - '*.metacubex.one'
-
-            - '*.steamstatic.com'
-            - '*.steamserver.net'
-            - '*.steampowered.com'
-            - '*.steamcommunity.com'
-
-            - '*.github.com'
-            - '*.githubusercontent.com'
-            - '*.githubassets.com'
-
-            - '*.google.com'
-            - '*.google.com.hk'
-            - '*.googleusercontent.com'
-            - '*.googlevideo.com'
-            - '*.googleapis.com'
-            - '*.ggpht.com'
-            - '*.youtube.com'
-            - '*.ytimg.com'
+        - 223.5.5.5
+        - 223.6.6.6
+    proxy-server-nameserver:
+        - 223.5.5.5
+        - 223.6.6.6
+    nameserver-policy:
+        "geosite:cn,private":
+            - 223.5.5.5
+            - 223.6.6.6
+        "geosite:geolocation-!cn":
+            - tls://8.8.4.4
+            - tls://1.1.1.1
