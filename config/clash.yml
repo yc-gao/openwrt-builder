@@ -21,8 +21,8 @@ rules:
     - 'GEOIP,netflix,Proxy'
     - 'GEOSITE,netflix,Proxy'
 
-    - 'GEOIP,CN,DIRECT'
     - 'GEOIP,lan,DIRECT'
+    - 'GEOIP,CN,DIRECT'
     - 'GEOSITE,cn,DIRECT'
     - 'GEOSITE,geolocation-!cn,Proxy'
 
