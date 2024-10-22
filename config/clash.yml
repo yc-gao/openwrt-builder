@@ -9,7 +9,7 @@ proxy-groups:
 # https://github.com/v2fly/domain-list-community/
 rules:
     - 'GEOSITE,steam@cn,DIRECT'
-    - 'GEOSITE,steam,Steam'
+    - 'GEOSITE,steam,Proxy'
 
     - 'GEOSITE,github,Proxy'
 
