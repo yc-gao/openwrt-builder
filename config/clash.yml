@@ -1,12 +1,15 @@
+# https://wiki.metacubex.one/
 proxy-groups:
     - { name: Proxy, type: select, proxies: [Proxy-manual, Proxy-test, Proxy-fallback] }
     - { name: Proxy-manual, type: select, proxies: *pg_default }
     - { name: Proxy-test, type: url-test, proxies: *pg_default }
     - { name: Proxy-fallback, type: fallback, proxies: *pg_default }
     - { name: GPT, type: select, proxies: *pg_GPT }
+# https://github.com/Loyalsoldier/geoip
+# https://github.com/v2fly/domain-list-community/
 rules:
-    - 'GEOIP,google,Proxy'
-    - 'GEOSITE,google,Proxy'
+    - 'GEOSITE,steam@cn,DIRECT'
+    - 'GEOSITE,steam,Steam'
 
     - 'GEOSITE,github,Proxy'
 
@@ -21,10 +24,14 @@ rules:
     - 'GEOIP,netflix,Proxy'
     - 'GEOSITE,netflix,Proxy'
 
-    - 'GEOIP,lan,DIRECT'
-    - 'GEOIP,CN,DIRECT'
+    - 'GEOIP,google,Proxy'
+    - 'GEOSITE,google,Proxy'
+
+    - 'GEOIP,cn,DIRECT'
     - 'GEOSITE,cn,DIRECT'
-    - 'GEOSITE,geolocation-!cn,Proxy'
+    - 'DOMAIN-SUFFIX,cn,DIRECT'
+
+    - 'GEOIP,private,DIRECT'
 
     - 'MATCH,Proxy'
 dns:
@@ -39,8 +46,8 @@ dns:
         - 223.5.5.5
         - 223.6.6.6
     nameserver:
-        - 223.5.5.5
-        - 223.6.6.6
+        - tls://8.8.4.4
+        - tls://1.1.1.1
     nameserver-policy:
         "geosite:cn,private":
             - 223.5.5.5
