@@ -25,9 +25,6 @@ dns:
     default-nameserver:
         - 223.5.5.5
         - 223.6.6.6
-    nameserver:
-        - tls://8.8.4.4
-        - tls://1.1.1.1
     nameserver-policy:
         "geosite:apple":
             - 223.5.5.5
@@ -50,3 +47,6 @@ dns:
         "+.cn":
             - 223.5.5.5
             - 223.6.6.6
+        "+":
+            - tls://8.8.4.4
+            - tls://1.1.1.1
