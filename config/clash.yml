@@ -8,6 +8,8 @@ proxy-groups:
 # https://github.com/Loyalsoldier/geoip
 # https://github.com/v2fly/domain-list-community/
 rules:
+    - 'DOMAIN-SUFFIX,nvcr.io,DIRECT'
+
     - 'GEOSITE,apple,DIRECT'
 
     - 'DOMAIN-SUFFIX,fromsoftware-game.net,DIRECT'
@@ -26,6 +28,9 @@ dns:
         - 223.5.5.5
         - 223.6.6.6
     nameserver-policy:
+        "+.nvcr.io":
+            - 223.5.5.5
+            - 223.6.6.6
         "geosite:apple":
             - 223.5.5.5
             - 223.6.6.6
