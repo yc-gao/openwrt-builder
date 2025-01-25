@@ -8,50 +8,54 @@ proxy-groups:
 # https://github.com/Loyalsoldier/geoip
 # https://github.com/v2fly/domain-list-community/
 rules:
-    - 'DOMAIN-SUFFIX,nvcr.io,DIRECT'
-
-    - 'GEOSITE,apple,DIRECT'
-
     - 'DOMAIN-SUFFIX,fromsoftware-game.net,DIRECT'
     - 'DOMAIN-SUFFIX,steamcontent.com,DIRECT'
+    - 'DOMAIN-SUFFIX,steamstatic.com,DIRECT'
     - 'GEOSITE,steam@cn,DIRECT'
 
-    - 'GEOIP,private,DIRECT'
+    - 'GEOSITE,apple,DIRECT'
 
     - 'GEOIP,cn,DIRECT'
     - 'GEOSITE,cn,DIRECT'
     - 'DOMAIN-SUFFIX,cn,DIRECT'
 
+    - 'DOMAIN-SUFFIX,nvcr.io,DIRECT'
+
+    - 'GEOIP,private,DIRECT'
+
     - 'MATCH,Proxy'
 dns:
     default-nameserver:
+        - 8.8.8.8
         - 223.5.5.5
         - 223.6.6.6
-    nameserver-policy:
-        "+.nvcr.io":
-            - 223.5.5.5
-            - 223.6.6.6
-        "geosite:apple":
-            - 223.5.5.5
-            - 223.6.6.6
-        "+.fromsoftware-game.net":
-            - 223.5.5.5
-            - 223.6.6.6
-        "+.steamcontent.com":
-            - 223.5.5.5
-            - 223.6.6.6
-        "geosite:steam@cn":
-            - 223.5.5.5
-            - 223.6.6.6
-        "geosite:private":
-            - 223.5.5.5
-            - 223.6.6.6
-        "geosite:cn":
-            - 223.5.5.5
-            - 223.6.6.6
-        "+.cn":
-            - 223.5.5.5
-            - 223.6.6.6
-        "+":
-            - tls://8.8.4.4
-            - tls://1.1.1.1
+        - 114.114.114.114
+    # nameserver-policy:
+    #     "+.nvcr.io":
+    #         - 223.5.5.5
+    #         - 223.6.6.6
+    #     "geosite:apple":
+    #         - 223.5.5.5
+    #         - 223.6.6.6
+    #     "+.fromsoftware-game.net":
+    #         - 223.5.5.5
+    #         - 223.6.6.6
+    #     "+.steamcontent.com":
+    #         - 223.5.5.5
+    #         - 223.6.6.6
+    #     "geosite:steam@cn":
+    #         - 223.5.5.5
+    #         - 223.6.6.6
+    #     "geosite:private":
+    #         - 223.5.5.5
+    #         - 223.6.6.6
+    #     "geosite:cn":
+    #         - 223.5.5.5
+    #         - 223.6.6.6
+    #     "+.cn":
+    #         - 223.5.5.5
+    #         - 223.6.6.6
+    #     "+":
+    #         - tls://8.8.4.4
+    #         - tls://1.1.1.1
+
