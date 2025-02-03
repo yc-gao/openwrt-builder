@@ -1,25 +1,23 @@
 # https://wiki.metacubex.one/
 proxy-groups:
     - { name: Proxy, type: select, proxies: [Proxy-fallback, Proxy-test, Proxy-manual] }
-    - { name: Proxy-fallback, type: fallback, proxies: *pg_default }
-    - { name: Proxy-test, type: url-test, proxies: *pg_default }
-    - { name: Proxy-manual, type: select, proxies: *pg_default }
-    - { name: GPT, type: select, proxies: *pg_GPT }
+    - { name: Proxy-fallback, type: fallback, proxies: *pg_all }
+    - { name: Proxy-test, type: url-test, proxies: *pg_all }
+    - { name: Proxy-manual, type: select, proxies: *pg_all }
 # https://github.com/Loyalsoldier/geoip
 # https://github.com/v2fly/domain-list-community/
 rules:
-    - 'DOMAIN-SUFFIX,fromsoftware-game.net,DIRECT'
-    - 'DOMAIN-SUFFIX,steamcontent.com,DIRECT'
-    - 'DOMAIN-SUFFIX,steamstatic.com,DIRECT'
-    - 'GEOSITE,steam@cn,DIRECT'
+    - 'DOMAIN-SUFFIX,nvcr.io,DIRECT'
 
     - 'GEOSITE,apple,DIRECT'
+
+    - 'DOMAIN-SUFFIX,fromsoftware-game.net,DIRECT'
+    - 'DOMAIN-SUFFIX,steamcontent.com,DIRECT'
+    - 'GEOSITE,steam@cn,DIRECT'
 
     - 'GEOIP,cn,DIRECT'
     - 'GEOSITE,cn,DIRECT'
     - 'DOMAIN-SUFFIX,cn,DIRECT'
-
-    - 'DOMAIN-SUFFIX,nvcr.io,DIRECT'
 
     - 'GEOIP,private,DIRECT'
 
@@ -47,13 +45,13 @@ dns:
         "geosite:steam@cn":
             - 223.5.5.5
             - 223.6.6.6
-        "geosite:private":
-            - 223.5.5.5
-            - 223.6.6.6
         "geosite:cn":
             - 223.5.5.5
             - 223.6.6.6
         "+.cn":
+            - 223.5.5.5
+            - 223.6.6.6
+        "geosite:private":
             - 223.5.5.5
             - 223.6.6.6
         "+":
