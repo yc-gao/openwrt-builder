@@ -18,7 +18,6 @@ do_linux() {
 do_macos() {
     qemu-system-x86_64 \
         -M q35 \
-        -accel hvf \
         -m 1G \
         -drive if=pflash,format=raw,readonly=on,file=/opt/homebrew/share/qemu/edk2-x86_64-code.fd \
         -drive format=raw,file="$1" \
