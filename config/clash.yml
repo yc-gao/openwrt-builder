@@ -7,12 +7,12 @@ proxies:
       password: *****
     - name: wg
       type: wireguard
-      private-key: *************
       server: ******
       port: ***
       ip: 10.2.0.2/32
-      public-key: *****
       allowed-ips: ['0.0.0.0/0']
+      private-key: *************
+      public-key: *****
 proxy-groups:
     - name: Proxy,
       type: select
