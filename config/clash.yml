@@ -30,8 +30,6 @@ rules:
     - DOMAIN-SUFFIX,x.com,Proxy
     - DOMAIN-SUFFIX,twimg.com,Proxy
     
-    - DOMAIN-KEYWORD,tradingview,Proxy
-    
     - DOMAIN-KEYWORD,youtube,Proxy
     - DOMAIN-KEYWORD,googlevideo,Proxy
     - DOMAIN-SUFFIX,wikipedia.org,Proxy
@@ -39,15 +37,19 @@ rules:
     - DOMAIN-KEYWORD,github,Proxy
     - DOMAIN-SUFFIX,v2ex.com,Proxy
     - DOMAIN-KEYWORD,v2ex,Proxy
+    - DOMAIN-KEYWORD,tradingview,Proxy
     
     # steam
-    - DOMAIN-KEYWORD,steampowered,Proxy
-    - DOMAIN-KEYWORD,steamcommunity,Proxy
+    - DOMAIN-SUFFIX,steampowered.com,Proxy
+    - DOMAIN-SUFFIX,steamcommunity.com,Proxy
+    - DOMAIN-SUFFIX,steamstatic.com,Proxy
+    - DOMAIN-SUFFIX,steamserver.net,Proxy
+
     - DOMAIN-SUFFIX,steamgames.com,Proxy
-    - DOMAIN-KEYWORD,steamstatic,Proxy
     - DOMAIN-KEYWORD,steambroadcast,Proxy
     - DOMAIN-KEYWORD,steamstore,Proxy
 
+    # other
     - DOMAIN-KEYWORD,missav,Proxy
     - DOMAIN,fourhoi.com,Proxy
     - DOMAIN,myavlive.com,Proxy
