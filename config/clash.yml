@@ -5,10 +5,18 @@ proxies:
       type: ss
       cipher: chacha20-ietf-poly1305
       password: *****
+    - name: wg
+      type: wireguard
+      private-key: *************
+      server: ******
+      port: ***
+      ip: 10.2.0.2/32
+      public-key: *****
+      allowed-ips: ['0.0.0.0/0']
 proxy-groups:
     - name: Proxy,
       type: select
-      proxies: [腾讯云]
+      proxies: [腾讯云,wg]
 
 # https://github.com/Loyalsoldier/geoip
 # https://github.com/v2fly/domain-list-community/
@@ -54,6 +62,9 @@ rules:
     - DOMAIN-SUFFIX,jable.tv,Proxy
     - DOMAIN-SUFFIX,rou.video,Proxy
     
+    # temporary rules
+    - DOMAIN-SUFFIX,purevpn.com,Proxy
+
     - MATCH,DIRECT
 
 dns:
