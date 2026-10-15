@@ -1,60 +1,65 @@
-# https://wiki.metacubex.one/
+proxies:
+    - name: 腾讯云
+      server: **********
+      port: *****
+      type: ss
+      cipher: chacha20-ietf-poly1305
+      password: *****
 proxy-groups:
-    - { name: Proxy, type: select, proxies: [Proxy-fallback, Proxy-test, Proxy-manual] }
-    - { name: Proxy-fallback, type: fallback, proxies: *pg_all }
-    - { name: Proxy-test, type: url-test, proxies: *pg_all }
-    - { name: Proxy-manual, type: select, proxies: *pg_all }
+    - name: Proxy,
+      type: select
+      proxies: [腾讯云]
+
 # https://github.com/Loyalsoldier/geoip
 # https://github.com/v2fly/domain-list-community/
 rules:
-    - 'DOMAIN-SUFFIX,nvcr.io,DIRECT'
+    - DOMAIN-KEYWORD,google,Proxy
+    - DOMAIN-SUFFIX,gstatic.com,Proxy
+    - DOMAIN-SUFFIX,telegram.org,Proxy
+    - DOMAIN-SUFFIX,threads.com,Proxy
+    - DOMAIN-SUFFIX,t.me,Proxy
+    
+    - DOMAIN-SUFFIX,x.com,Proxy
+    - DOMAIN-SUFFIX,twimg.com,Proxy
+    
+    - DOMAIN-KEYWORD,tradingview,Proxy
+    
+    - DOMAIN-KEYWORD,youtube,Proxy
+    - DOMAIN-KEYWORD,googlevideo,Proxy
+    - DOMAIN-SUFFIX,wikipedia.org,Proxy
+    
+    - DOMAIN-KEYWORD,github,Proxy
+    - DOMAIN-SUFFIX,v2ex.com,Proxy
+    - DOMAIN-KEYWORD,v2ex,Proxy
+    
+    # steam
+    - DOMAIN-KEYWORD,steampowered,Proxy
+    - DOMAIN-KEYWORD,steamcommunity,Proxy
+    - DOMAIN-SUFFIX,steamgames.com,Proxy
+    - DOMAIN-KEYWORD,steamstatic,Proxy
+    - DOMAIN-KEYWORD,steambroadcast,Proxy
+    - DOMAIN-KEYWORD,steamstore,Proxy
 
-    - 'GEOSITE,apple,DIRECT'
+    - DOMAIN-KEYWORD,missav,Proxy
+    - DOMAIN,fourhoi.com,Proxy
+    - DOMAIN,myavlive.com,Proxy
+    - DOMAIN-KEYWORD,camsvibes,Proxy
+    - DOMAIN-KEYWORD,hotzcam,Proxy
+    - DOMAIN-KEYWORD,alicesw,Proxy
+    - DOMAIN-KEYWORD,pornhub,Proxy
+    - DOMAIN-KEYWORD,onlyfans,Proxy
+    - DOMAIN-SUFFIX,jvid.com,Proxy
+    - DOMAIN-SUFFIX,phncdn.com,Proxy
+    - DOMAIN-SUFFIX,haijiao.com,Proxy
+    - DOMAIN-SUFFIX,jable.tv,Proxy
+    - DOMAIN-SUFFIX,rou.video,Proxy
+    
+    - MATCH,DIRECT
 
-    - 'DOMAIN-SUFFIX,fromsoftware-game.net,DIRECT'
-    - 'DOMAIN-SUFFIX,steamcontent.com,DIRECT'
-    - 'GEOSITE,steam@cn,DIRECT'
-
-    - 'GEOIP,cn,DIRECT'
-    - 'GEOSITE,cn,DIRECT'
-    - 'DOMAIN-SUFFIX,cn,DIRECT'
-
-    - 'GEOIP,private,DIRECT'
-
-    - 'MATCH,Proxy'
 dns:
     default-nameserver:
-        - tls://8.8.4.4
-        - 119.29.29.29
-        - 223.5.5.5
-        - 223.6.6.6
-        - 114.114.114.114
+        - https://223.5.5.5/dns-query
     nameserver-policy:
-        "+.nvcr.io":
-            - 223.5.5.5
-            - 223.6.6.6
-        "geosite:apple":
-            - 223.5.5.5
-            - 223.6.6.6
-        "+.fromsoftware-game.net":
-            - 223.5.5.5
-            - 223.6.6.6
-        "+.steamcontent.com":
-            - 223.5.5.5
-            - 223.6.6.6
-        "geosite:steam@cn":
-            - 223.5.5.5
-            - 223.6.6.6
-        "geosite:cn":
-            - 223.5.5.5
-            - 223.6.6.6
-        "+.cn":
-            - 223.5.5.5
-            - 223.6.6.6
-        "geosite:private":
-            - 223.5.5.5
-            - 223.6.6.6
         "+":
-            - tls://8.8.4.4
-            - tls://1.1.1.1
+            - https://223.5.5.5/dns-query
 
