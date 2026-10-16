@@ -8,6 +8,7 @@ on:
 env:
   REPO: https://github.com/immortalwrt/immortalwrt.git
   TAG: v25.12.2
+  CLASH: https://raw.githubusercontent.com/vernesong/OpenClash/276ae9d8e7f7d9b9814ae23e015cfe29804b2cbe/master/meta/clash-linux-amd64-compatible.tar.gz
 
 jobs:
   build:
@@ -28,7 +29,7 @@ jobs:
       - name: install openclash core
         run: |
           mkdir -p files/etc/openclash/core
-          wget -qO - https://raw.githubusercontent.com/vernesong/OpenClash/276ae9d8e7f7d9b9814ae23e015cfe29804b2cbe/master/meta/clash-linux-amd64-compatible.tar.gz | tar -xz -C files/etc/openclash/core
+          wget -qO - ${CLASH} | tar -xz -C files/etc/openclash/core
           mv files/etc/openclash/core/clash files/etc/openclash/core/clash_meta
       - name: prepare
         run: |
