@@ -10,7 +10,7 @@ do_linux() {
         -drive if=pflash,format=raw,readonly=on,file=/usr/share/edk2-ovmf/x64/OVMF_CODE.fd \
         -drive format=raw,file="$1" \
         -nic user \
-        -nic user,net=192.168.1.0/24,hostfwd=tcp::9080-192.168.1.1:80,hostfwd=tcp::9090-192.168.1.1:9090 \
+        -nic user,net=192.168.31.0/24,hostfwd=tcp::9080-192.168.31.1:80,hostfwd=tcp::9090-192.168.31.1:9090 \
         -nic user \
         -nic user
 }
@@ -22,7 +22,7 @@ do_macos() {
         -drive if=pflash,format=raw,readonly=on,file=/opt/homebrew/share/qemu/edk2-x86_64-code.fd \
         -drive format=raw,file="$1" \
         -nic user \
-        -nic user,net=192.168.1.0/24,hostfwd=tcp::9080-192.168.1.1:80,hostfwd=tcp::9090-192.168.1.1:9090 \
+        -nic user,net=192.168.31.0/24,hostfwd=tcp::9080-192.168.31.1:80,hostfwd=tcp::9090-192.168.31.1:9090 \
         -nic user \
         -nic user
 }

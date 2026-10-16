@@ -7,7 +7,7 @@ on:
 
 env:
   REPO: https://github.com/immortalwrt/immortalwrt.git
-  TAG: v23.05.4
+  TAG: v25.12.2
 
 jobs:
   build:
